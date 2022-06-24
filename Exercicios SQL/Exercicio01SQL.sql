@@ -1,17 +1,28 @@
-CREATE DATABASE db_regeneration2;
-USE db_regeneration2;
+CREATE DATABASE db_rhgeneration;
+USE db_rhgeneration;
 
-CREATE TABLE tb_funcionarios2 (
-id BIGINT auto_increment, 
-nome VARCHAR(255), 
-salario DECIMAL(9,2), 
-setor VARCHAR(255), 
-matricula INT, 
-primary key (id)); 
+CREATE TABLE tb_setor(
+	id BIGINT auto_increment,
+    nome_setor VARCHAR(255),
+    PRIMARY KEY(id) );
 
-SELECT * FROM tb_funcionarios2; 
-INSERT INTO tb_funcionarios2 (nome, salario, setor, matricula) VALUES ("Jacque", 9000.50, "Tecnologia", 02);
+CREATE TABLE tb_funcionarios(
+	id BIGINT auto_increment,
+    nome VARCHAR(255),
+    salario DECIMAL(9,2),
+    matricula INT,
+    setor_id bigint,
+    
+    PRIMARY KEY(id),
+    FOREIGN KEY (setor_id) REFERENCES tb_setor(id) );
 
-UPDATE tb_funcionarios 
-SET nome = "Marcelo" 
-WHERE id = 2 
+INSERT INTO tb_setor(nome_setor)VALUES("Administração");
+INSERT INTO tb_setor(nome_setor)VALUES("Tecnologia");
+INSERT INTO tb_setor(nome_setor)VALUES("Financeiro");
+SELECT * FROM tb_setor;
+
+INSERT INTO tb_funcionarios(nome, salario, matricula, setor_id)VALUES("Wan",20000,1,3);
+INSERT INTO tb_funcionarios(nome, salario, matricula, setor_id)VALUES("Wellington",15000,2,1);
+INSERT INTO tb_funcionarios(nome, salario, matricula, setor_id)VALUES("Rosa",23000,3,2);
+SELECT * FROM tb_funcionarios;
+
